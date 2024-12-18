@@ -10,7 +10,7 @@ export default function Index() {
     const dispatch = useDispatch()
     React.useEffect(() => {
         dispatch(Init())
-    }, [])
+    }, [dispatch])
 
     return (
         <>

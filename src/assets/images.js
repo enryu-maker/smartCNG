@@ -8,5 +8,7 @@ export const Images = {
     left: require('./images/left.png'),
     wallet: require('./images/wallet.png'),
     scooter: require('./images/scooter.png'),
+    car: require('./images/car.png'),
+
 
 }

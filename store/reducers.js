@@ -3,7 +3,10 @@ const initialState = {
     location: {},
     station: [],
     profile: {},
-    wallet: {}
+    wallet: {},
+    vehicle: [],
+    slot: [],
+    booking: [],
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -32,6 +35,21 @@ const mainReducer = (state = initialState, action) => {
             return {
                 ...state,
                 wallet: action.payload,
+            };
+        case 'VEHICLE':
+            return {
+                ...state,
+                vehicle: action.payload,
+            };
+        case 'SLOT':
+            return {
+                ...state,
+                slot: action.payload,
+            };
+        case 'GET_BOOKING':
+            return {
+                ...state,
+                booking: action.payload,
             };
         default:
             return state;

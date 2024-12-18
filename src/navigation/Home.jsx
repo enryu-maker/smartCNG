@@ -6,6 +6,9 @@ import Book from '../pages/home/Book';
 import Order from '../pages/home/Order';
 import Wallet from '../pages/home/Wallet';
 import Topup from '../pages/home/Topup';
+import AddVehicle from '../pages/home/AddScreen/AddVehicle';
+import BookStation from '../pages/home/AddScreen/BookStation';
+import Success from '../pages/home/Success';
 const Stack = createNativeStackNavigator();
 export default function Home() {
     return (
@@ -25,6 +28,10 @@ export default function Home() {
             <Stack.Screen name="Order" component={Order} />
             <Stack.Screen name="Wallet" component={Wallet} />
             <Stack.Screen name="Top" component={Topup} />
+            <Stack.Screen name="AddVehicle" component={AddVehicle} />
+            <Stack.Screen name="BookStation" component={BookStation} />
+            <Stack.Screen name="Success" component={Success} />
+
         </Stack.Navigator>
     )
 }

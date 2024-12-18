@@ -15,7 +15,7 @@ export default function Home({ navigation }) {
 
     useEffect(() => {
         dispatch(getStation(location, setLoading, navigation))
-    }, [location])
+    }, [location, dispatch])
 
     // Contractor data
 

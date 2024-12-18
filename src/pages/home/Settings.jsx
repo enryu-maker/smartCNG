@@ -52,7 +52,7 @@ export default function Settings({
                     }}
                     className=' flex-row w-[92%] py-1 justify-between self-center'>
                     <Text className="text-black text-xl  text-start  font-body">
-                        Orders
+                        Bookings
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity className=' flex-row w-[92%] justify-between self-center'>

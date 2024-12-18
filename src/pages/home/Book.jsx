@@ -1,11 +1,18 @@
 import React from 'react';
 import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, Image, Linking } from 'react-native';
 import { Images } from '../../assets/images';
+import { useDispatch } from 'react-redux';
+import { getSlot } from '../../../store/Actions/userActions';
 export default function ContractorInfo({ navigation, route }) {
     const openGoogleMaps = (latitude, longitude) => {
         const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
         Linking.openURL(url).catch((err) => console.error("Failed to open Google Maps:", err));
     };
+    const [loading, setLoading] = React.useState(false)
+    const dispatch = useDispatch()
+    React.useEffect(() => {
+        dispatch(getSlot(setLoading))
+    }, [])
     return (
         <>
 
@@ -48,7 +55,9 @@ export default function ContractorInfo({ navigation, route }) {
 
             </SafeAreaView>
             <TouchableOpacity
-                // onPress={() => navigation.navigate('Book')}
+                onPress={() => navigation.navigate('BookStation', {
+                    id: route?.params?.data?.id
+                })}
                 className="bg-primary h-20 justify-center items-center"
             >
                 <Text className="text-white text-center text-lg font-heading">Book Slot</Text>
