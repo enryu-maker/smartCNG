@@ -51,6 +51,11 @@ const mainReducer = (state = initialState, action) => {
                 ...state,
                 booking: action.payload,
             };
+        case 'LOGOUT':
+            return {
+                ...state,
+                access: null,
+            };
         default:
             return state;
     }

@@ -55,7 +55,11 @@ export default function Settings({
                         Bookings
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity className=' flex-row w-[92%] justify-between self-center'>
+                <TouchableOpacity
+                    onPress={() => {
+                        dispatch({ type: 'LOGOUT' })
+                    }}
+                    className=' flex-row w-[92%] justify-between self-center'>
                     <Text className="text-red-500 text-xl py-1 text-start  font-heading">
                         Logout
                     </Text>
