@@ -2,10 +2,39 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Images } from '../../assets/images'; // Make sure you have the appropriate image
+import { useDispatch } from 'react-redux';
+import { UserRegister } from '../../../store/Actions/AuthAction';
 
 export default function Register({ navigation }) {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [image, setImage] = React.useState(null);
+    const dispatch = useDispatch();
+
+    const pickImage = async () => {
+        let result = await ImagePicker.openPicker({
+            width: 300,
+            height: 300,
+            cropping: true,
+            compressImageQuality: 0.7,
+
+        });
+
+        if (result.cancelled) {
+        }
+
+        if (!result.cancelled) {
+            const newImageUri = Platform.OS === "ios" ? 'file:///' + result?.sourceURL.split('file:/').join('') : 'file:///' + result?.path.split('file:/').join('')
+            const uriParts = result?.path?.split('.')
+            const fileType = uriParts[uriParts.length - 1];
+            setImage({
+                type: `image/${fileType}`,
+                uri: result?.path,
+                name: `photo.${fileType}`
+            });
+        }
+    };
 
     return (
         <View className="flex-1 bg-white">
@@ -16,20 +45,56 @@ export default function Register({ navigation }) {
                 keyboardShouldPersistTaps="handled"
             >
                 <View className="flex-1 h-full w-full justify-center items-center space-y-6">
-                    {/* Top Image */}
-                    <Image
-                        source={Images.login}
-                        className="w-[88%] h-[40%] object-contain"
-                        resizeMode="contain"
-                    />
 
                     {/* Form Section */}
-                    <View className="h-[50%] rounded-t-3xl space-y-6 w-full items-center justify-center">
+                    <View className=" rounded-t-3xl space-y-6 w-full items-center justify-center">
                         <Text className="text-primary text-4xl py-2 text-center w-[88%] font-heading">
                             Sign up <Text className="font-body text-black"> your Account</Text>
                         </Text>
 
                         <View className="space-y-6 w-full mx-auto justify-center items-center">
+                            <View
+                                className=' justify-center items-center'
+                            >
+                                <TouchableOpacity onPress={pickImage}>
+                                    <View
+                                        className=' justify-center items-center'
+                                    >
+                                        {image ? (
+                                            <View>
+                                                <Image
+                                                    source={{ uri: image?.uri }}
+                                                    className='w-[80px] h-[80px] border rounded-full justify-center items-center text-center'
+                                                    resizeMode='cover'
+                                                />
+                                            </View>
+                                        ) : (
+                                            <View
+                                                className='w-[80px] h-[80px] border rounded-full justify-center items-center text-center'
+
+                                            >
+                                            </View>
+                                        )}
+                                    </View>
+                                    <View
+                                    >
+                                        <Text
+
+                                            className=' text-center font-suseR'
+                                        >
+                                            Upload your display pic*
+                                        </Text>
+                                        {image === null && (
+                                            <Text
+
+                                                className=' text-red-500 text-sm text-center'
+                                            >
+                                                Image is compulsory
+                                            </Text>
+                                        )}
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
                             {/* Name Input */}
                             <View className="w-full items-center">
                                 <Text className="w-[88%] self-center text-start font-heading text-lg">Name</Text>
@@ -60,7 +125,7 @@ export default function Register({ navigation }) {
                             <TouchableOpacity
                                 activeOpacity={0.7}
                                 onPress={() => {
-                                    navigation.navigate('Otp');
+                                    dispatch(UserRegister(name, phone, setLoading, navigation));
                                 }}
                                 className="bg-primary justify-center items-center h-[50px] w-[88%] rounded-lg"
                             >

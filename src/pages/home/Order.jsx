@@ -43,9 +43,6 @@ export default function Order({
                     renderItem={({ item, index }) => (
                         <TouchableOpacity
                             key={index}
-                            onPress={() => {
-                                openGoogleMaps(item?.station?.latitude, item?.station?.longitude)
-                            }}
                             className='bg-white rounded-md flex-row space-x-5 items-center p-4 my-4 mx-2'>
                             <View>
                                 <Text className="text-primary text-sm font-body">
@@ -56,6 +53,9 @@ export default function Order({
                                 </Text>
                                 <Text className="text-black text-base font-body">
                                     {item?.station?.name} | {item?.station?.location}
+                                </Text>
+                                <Text className="text-black text-base font-body">
+                                    Status: {item.status === 'placed' ? <Text className='text-red-500'>Placed</Text> : <Text className='text-green-500'>Completed</Text>}
                                 </Text>
                             </View>
                         </TouchableOpacity>

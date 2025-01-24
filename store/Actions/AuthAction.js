@@ -21,14 +21,23 @@ export const Init = () => {
   };
 };
 
-export const UserRegister = (name, number, setLoading, navigation) => {
+export const UserRegister = (name, number, image, setLoading, navigation) => {
   return async dispatch => {
+    const formdata = new FormData();
+    formdata.append('name', name);
+    formdata.append('phone_number', '+91' + number);
+    formdata.append('icon', image);
     setLoading(true);
     try {
-      let response = await axios.post(baseURL + '/v1/user/register/', {
-        name: name,
-        phone_number: '+91' + number,
-      });
+      let response = await axios.post(baseURL + '/v1/user/register/',
+        formdata,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      console.log(response)
       Toast.show({
         type: 'success',
         text1: response?.data?.message,
