@@ -12,6 +12,7 @@ export default function Home({ navigation }) {
     const [loading, setLoading] = useState(false);
     const location = useSelector((state) => state.main.location);
     const station = useSelector((state) => state.main.station);
+    console.log(station)
 
     useEffect(() => {
         dispatch(getStation(location, setLoading, navigation))
@@ -20,7 +21,7 @@ export default function Home({ navigation }) {
     // Contractor data
 
     useEffect(() => {
-        dispatch(getLocation(setLoading, Platform.OS));
+        // dispatch(getLocation(setLoading, Platform.OS));
     }, [dispatch]);
 
     return (
@@ -40,8 +41,8 @@ export default function Home({ navigation }) {
                     className="h-full w-full"
                     showsUserLocation={true}
                     initialRegion={{
-                        latitude: location?.latitude,
-                        longitude: location?.longitude,
+                        latitude: 19.9975,
+                        longitude: 73.7898,
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}
@@ -52,8 +53,8 @@ export default function Home({ navigation }) {
                                 <Marker
                                     key={index}
                                     coordinate={{
-                                        latitude: contractor.latitude,
-                                        longitude: contractor.longitude,
+                                        latitude: parseFloat(contractor.latitude),
+                                        longitude: parseFloat(contractor.longitude),
                                     }}
                                     onPress={() => {
                                         navigation.navigate("Book", {

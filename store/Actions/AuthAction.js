@@ -217,7 +217,7 @@ export const getStation = (location, setLoading, navigation) => {
   return async dispatch => {
     setLoading(true);
     try {
-      let response = await axiosIns.get(baseURL + `/v1/user/nearby-station/?user_lat=${location?.latitude}&user_long=${location?.longitude}&range_km=10`);
+      let response = await axiosIns.get(baseURL + `/v1/user/nearby-station/?user_lat=${19.9975}&user_long=${73.7898}&range_km=10`);
       dispatch({
         type: "STATION",
         payload: response.data

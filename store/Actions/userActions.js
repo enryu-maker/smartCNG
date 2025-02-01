@@ -10,6 +10,7 @@ export const getLocation = (setLoading, type) => {
         if (type === "ios") {
             Geolocation.getCurrentPosition(
                 async (position) => {
+                    console.log(position)
                     await axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=328fd33ba9f0413d9b38d214f042e36c`).
                         then((res) => {
                             const city = res.data.features[0].properties.city;
@@ -51,6 +52,7 @@ export const getLocation = (setLoading, type) => {
                 timeout: 60000,
             })
                 .then(location => {
+                    console.log(location)
                     axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${location?.latitude}&lon=${location?.longitude}&apiKey=328fd33ba9f0413d9b38d214f042e36c`).
                         then((res) => {
                             const city = res.data.features[0].properties.city;
