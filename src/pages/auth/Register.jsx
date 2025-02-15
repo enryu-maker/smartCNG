@@ -12,30 +12,6 @@ export default function Register({ navigation }) {
     const [image, setImage] = React.useState(null);
     const dispatch = useDispatch();
 
-    const pickImage = async () => {
-        let result = await ImagePicker.openPicker({
-            width: 300,
-            height: 300,
-            cropping: true,
-            compressImageQuality: 0.7,
-
-        });
-
-        if (result.cancelled) {
-        }
-
-        if (!result.cancelled) {
-            const newImageUri = Platform.OS === "ios" ? 'file:///' + result?.sourceURL.split('file:/').join('') : 'file:///' + result?.path.split('file:/').join('')
-            const uriParts = result?.path?.split('.')
-            const fileType = uriParts[uriParts.length - 1];
-            setImage({
-                type: `image/${fileType}`,
-                uri: result?.path,
-                name: `photo.${fileType}`
-            });
-        }
-    };
-
     return (
         <View className="flex-1 bg-white">
             <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
@@ -53,48 +29,6 @@ export default function Register({ navigation }) {
                         </Text>
 
                         <View className="space-y-6 w-full mx-auto justify-center items-center">
-                            <View
-                                className=' justify-center items-center'
-                            >
-                                <TouchableOpacity onPress={pickImage}>
-                                    <View
-                                        className=' justify-center items-center'
-                                    >
-                                        {image ? (
-                                            <View>
-                                                <Image
-                                                    source={{ uri: image?.uri }}
-                                                    className='w-[80px] h-[80px] border rounded-full justify-center items-center text-center'
-                                                    resizeMode='cover'
-                                                />
-                                            </View>
-                                        ) : (
-                                            <View
-                                                className='w-[80px] h-[80px] border rounded-full justify-center items-center text-center'
-
-                                            >
-                                            </View>
-                                        )}
-                                    </View>
-                                    <View
-                                    >
-                                        <Text
-
-                                            className=' text-center font-suseR'
-                                        >
-                                            Upload your display pic*
-                                        </Text>
-                                        {image === null && (
-                                            <Text
-
-                                                className=' text-red-500 text-sm text-center'
-                                            >
-                                                Image is compulsory
-                                            </Text>
-                                        )}
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
                             {/* Name Input */}
                             <View className="w-full items-center">
                                 <Text className="w-[88%] self-center text-start font-heading text-lg">Name</Text>

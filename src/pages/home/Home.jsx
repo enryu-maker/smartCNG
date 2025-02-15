@@ -20,9 +20,10 @@ export default function Home({ navigation }) {
 
     // Contractor data
 
-    useEffect(() => {
-        // dispatch(getLocation(setLoading, Platform.OS));
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getLocation(setLoading, Platform.OS));
+    // }, [dispatch]);
+    console.log(location)
 
     return (
         <View className="bg-white flex-1 h-full w-full">
@@ -41,8 +42,8 @@ export default function Home({ navigation }) {
                     className="h-full w-full"
                     showsUserLocation={true}
                     initialRegion={{
-                        latitude: 19.9975,
-                        longitude: 73.7898,
+                        latitude: parseFloat(location?.latitude) || 19.9975,
+                        longitude: parseFloat(location?.longitude) || 73.7898,
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}

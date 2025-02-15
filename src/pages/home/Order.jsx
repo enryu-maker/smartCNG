@@ -25,7 +25,7 @@ export default function Order({
         Linking.openURL(url).catch((err) => console.error("Failed to open Google Maps:", err));
     };
     return (
-        <SafeAreaView className='flex-1'>
+        <SafeAreaView className='flex-1 bg-white mt-5'>
             <StatusBar backgroundColor={"#fff"} />
             <TouchableOpacity
                 onPress={() => navigation.goBack()}
@@ -34,7 +34,7 @@ export default function Order({
             >
                 <Image source={Images.left} className=' text-primary h-8 w-8' />
             </TouchableOpacity>
-            <View className='flex-1 h-full w-full  justify-start items-start px-4'>
+            <View className='h-full w-full mx-2  justify-cenyer items-center '>
                 <Text className="text-primary text-2xl py-3 text-start w-[88%] font-heading">
                     Bookings
                 </Text>
@@ -43,7 +43,12 @@ export default function Order({
                     renderItem={({ item, index }) => (
                         <TouchableOpacity
                             key={index}
-                            className='bg-white rounded-md flex-row space-x-5 items-center p-4 my-4 mx-2'>
+                            onPress={() => {
+                                navigation.navigate("OrderView", {
+                                    order: item
+                                })
+                            }}
+                            className='bg-gray-100 rounded-lg w-[95%] p-4  shadow-md '>
                             <View>
                                 <Text className="text-primary text-sm font-body">
                                     {item.order_id}
@@ -60,6 +65,7 @@ export default function Order({
                             </View>
                         </TouchableOpacity>
                     )}
+
                     keyExtractor={item => item._id}
                 />
             </View>

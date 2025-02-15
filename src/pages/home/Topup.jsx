@@ -19,7 +19,7 @@ export default function Topup({
         dispatch(getUserWallet(setLoading))
     };
     return (
-        <SafeAreaView className='flex-1'>
+        <SafeAreaView className='flex-1 mt-5 bg-white'>
             <StatusBar backgroundColor={"#fff"} />
             <TouchableOpacity
                 onPress={() => navigation.goBack()}

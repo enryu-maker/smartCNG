@@ -15,7 +15,7 @@ export default function Vehicle({
         dispatch(getVehicle(setLoading))
     }, [dispatch])
     return (
-        <SafeAreaView className='flex-1'>
+        <SafeAreaView className=' mt-5 bg-white  flex-1'>
             <StatusBar backgroundColor={"#fff"} />
             <View className='h-[50px] w-full flex-row  justify-between  items-center px-4'>
                 <Text className="text-primary text-2xl py-3 text-start  font-heading">

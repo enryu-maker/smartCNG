@@ -17,14 +17,14 @@ export default function Settings({
         dispatch(getUserWallet(setLoading))
     }, [dispatch])
     return (
-        <SafeAreaView className='flex-1'>
+        <SafeAreaView className='mt-5'>
             <StatusBar backgroundColor={"#fff"} />
-            <View className='flex-1 h-full w-full  justify-start items-start px-4'>
+            <View className='h-full w-full bg-white  justify-start items-start px-4'>
                 <Text className="text-primary text-2xl py-3 text-start w-[88%] font-heading">
                     Settings
                 </Text>
                 <View className='h-[100px] flex-row justify-between items-center w-full px-4 border-y border-gray-200 '>
-                    <Image source={{ uri: `data:image/png;base64,${profile?.icon}` }} className=' h-20 w-20 bg-primary rounded-full' />
+                    <Image source={Images.user} className=' h-16 w-16 border border-primary  rounded-full' />
                     <View className='w-[70%]'>
                         <Text className=' text-xl font-heading'>
                             {profile?.name}
