@@ -10,7 +10,7 @@ export default function Order({
     const dispatch = useDispatch()
     const booking = useSelector((state) => state.main.booking)
     const slotdata = useSelector((state) => state.main.slot)
-
+    console.log(booking)
     const [loading, setLoading] = React.useState(false)
     React.useEffect(() => {
         dispatch(getBooking(setLoading))
@@ -60,7 +60,7 @@ export default function Order({
                                     {item?.station?.name} | {item?.station?.location}
                                 </Text>
                                 <Text className="text-black text-base font-body">
-                                    Status: {item.status === 'placed' ? <Text className='text-red-500'>Placed</Text> : <Text className='text-green-500'>Completed</Text>}
+                                    Status: {item.status === 'Placed' ? <Text className='text-red-500'>Placed</Text> : <Text className='text-green-500'>Completed</Text>}
                                 </Text>
                             </View>
                         </TouchableOpacity>

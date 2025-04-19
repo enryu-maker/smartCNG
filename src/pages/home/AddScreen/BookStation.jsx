@@ -11,11 +11,10 @@ export default function BookStation({ navigation, route }) {
     const [loading, setLoading] = useState(false);
     const [date, setDate] = useState(new Date());
     const [open, setOpen] = useState(false);
-    const [slotd, setSlot] = useState('');
+    const [slotd, setSlot] = useState(null);
     const [amount, setAmount] = useState('');
 
     const dispatch = useDispatch();
-    const vehicle = useSelector((state) => state.main.vehicle);
     const slotdata = useSelector((state) => state.main.slot);
 
     const handleBooking = () => {
@@ -44,26 +43,9 @@ export default function BookStation({ navigation, route }) {
                     <Image source={Images.left} className='text-primary h-8 w-8' />
                 </TouchableOpacity>
 
-                {/* Title */}
                 <View className="space-y-8 w-full mt-5 mx-auto justify-center items-center">
 
-                    {/* Dropdown for available vehicles */}
-                    {/* <View className="w-full items-center">
-                        <Text className="w-[88%] self-center text-start font-heading text-lg">Vehicle</Text>
-                        <Dropdown
-                            style={{ width: '88%', borderBottomWidth: 1, paddingVertical: 10, paddingHorizontal: 12 }}
-                            itemTextStyle={{ fontFamily: "Poppins" }}
-                            data={vehicle}
-                            labelField="vehicle_number"
-                            valueField="vehicle_number"
-                            placeholder="Select Vehicle"
-                            placeholderStyle={{ color: '#8b8b8b' }}
-                            value={vehicleNumber}
-                            onChange={(item) => setVehicleNumber(item.vehicle_number)}
-                        />
-                    </View> */}
-
-                    {/* Dropdown for slot */}
+                    {/* Dropdown for available slots */}
                     <View className="w-full items-center">
                         <Text className="w-[88%] self-center text-start font-heading text-lg">Filling Slot</Text>
                         <Dropdown
@@ -74,12 +56,12 @@ export default function BookStation({ navigation, route }) {
                             valueField="id"
                             placeholder="Select Slot"
                             placeholderStyle={{ color: '#8b8b8b' }}
-                            value={slotd}
-                            onChange={(item) => setSlot(item)}
+                            value={slotd?.id}
+                            onChange={(item) => setSlot({ ...item })}
                         />
                     </View>
 
-                    {/* CNG Fill Amount */}
+                    {/* Amount input */}
                     <View className="w-full items-center">
                         <Text className="w-[88%] self-center text-start font-heading text-lg">CNG Fill Amount</Text>
                         <TextInput
@@ -92,7 +74,7 @@ export default function BookStation({ navigation, route }) {
                         />
                     </View>
 
-                    {/* CNG Fill Date */}
+                    {/* Date Picker trigger */}
                     <View className="w-full items-center">
                         <Text className="w-[88%] self-center text-start font-heading text-lg">CNG Fill Date</Text>
                         <TouchableOpacity onPress={() => setOpen(true)}>
@@ -100,7 +82,7 @@ export default function BookStation({ navigation, route }) {
                         </TouchableOpacity>
                     </View>
 
-                    {/* Date Picker */}
+                    {/* Date Picker Modal */}
                     <DatePicker
                         modal
                         open={open}
